@@ -1,0 +1,23 @@
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aqua;
+  height: 100px;
+}
+
+.card {
+  text-align: left;
+  border: solid black;
+  text-decoration: none;
+  width: 705px;
+}
+.card a {
+  color: black;
+}
+
+.card-beers{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
