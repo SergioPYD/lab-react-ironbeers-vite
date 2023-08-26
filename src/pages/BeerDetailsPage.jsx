@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import PacmanLoader from "react-spinners/PacmanLoader";
 
-function BeerDetailsPage() {
+function BeerDetailsPage(props) {
   const [oneBeer, setOneBeer] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   // const {image,name,tagline,first_brewed , attenuation_level,description,cotributed_by} = oneBeer
@@ -16,12 +16,24 @@ function BeerDetailsPage() {
 
   const getData = async () => {
     try {
+    if (props.randomBeer===true){
+
       const response = await axios.get(
+        `https://ih-beers-api2.herokuapp.com/beers/random`
+      );
+      console.log(response.data);
+      setOneBeer(response.data);
+      setIsLoading(false);
+
+    } else if (props.randomBeer === undefined){
+const response = await axios.get(
         `https://ih-beers-api2.herokuapp.com/beers/${params.beerId}`
       );
       console.log(response.data);
       setOneBeer(response.data);
       setIsLoading(false);
+    }
+      
     } catch (error) {
       redirect("/error");
     }
@@ -40,6 +52,7 @@ function BeerDetailsPage() {
   return (
     <div>
       <div>
+        
         <img src={oneBeer.image_url} alt="imageBeer" width={100} />
       </div>
       <div>
